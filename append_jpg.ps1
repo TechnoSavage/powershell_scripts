@@ -1,5 +1,8 @@
-Write-Host 'This script will append ".jpg" to all files in a specified directory.'
-[string]$folder = Read-Host 'Enter the path to the directory'
+Write-Host "`nThis script will append .jpg to all files in a specified directory.`n"
+[string]$folder = Read-Host 'Enter the path to the directory [C:\Users\*youruser*\Desktop\New folder]'
+If ($folder -eq "") {
+  $folder = "C:\Users\$env:Username\Desktop\New folder"
+}
 $exists = Test-Path $folder
 If ($exists) {
   Set-Location $folder
