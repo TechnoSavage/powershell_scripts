@@ -1,8 +1,10 @@
 
-function Photo-Folders{
-  param([parameter(Mandatory=$true)]
-        [string]$Path,
+function Create-PhotoFolders{
+  param([string]$Path,
         [string]$Year)
+  If (!$Path){
+    $Path = Get-Location
+  }
   If (!(Test-Path -Path $Path)) {
     $affirmative = 'y', 'yes'
     $response = Read-Host "$Path does not exist. Create it now? [y/n]"
@@ -10,6 +12,9 @@ function Photo-Folders{
       New-Item $Path -ItemType Directory
       Write-Host 'I executed'
     }
+  }
+  If (!$Year){
+    [string]$Year = Read-Host "Create folder structure for what year?"
   }
   Set-Location $Path
   New-Item -Name $Year -ItemType Directory

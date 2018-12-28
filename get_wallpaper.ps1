@@ -9,12 +9,20 @@ If ($exists) {
   Set-Location $folder
   $file_list = Get-ChildItem
   Write-Host $file_list
-  [string]$confirm = Read-Host 'Are these the files you wish to change the file extension for? [y/n]'
+  [string]$confirm = Read-Host 'Are these the files you wish to retrieve wallpaper from? [y/n]'
   If ('y', 'yes' -contains $confirm.ToLower()) {
     foreach ($item in $file_list) {
       $old_name = $item.Name
       $new_name = $item.Name + '.jpg'
       Rename-Item $old_name $new_name
+    }
+    $(Get-ChildItem -Filter *.jpg).FullName | ForEach-Object {
+      [void][reflection.assembly]::loadwithpartialname("system.drawing")
+      $img = [Drawing.Image]::FromFile($_)
+      $dimensions = [string]$img.Width + ' x ' + [string]$img.Height
+      If ($dimensions -ne "1920 x 1080") {
+        Remove-Item $_
+      }
     }
   }
   Else {Write-Host 'No changes were made.'}
