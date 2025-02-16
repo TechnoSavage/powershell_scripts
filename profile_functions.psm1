@@ -1,4 +1,7 @@
-function Compare-Hash {
+#Powershell functions to make life easier
+
+#Function to streamline validating hashes and checksums
+function Test-Hashes {
 		param (
 			[parameter(Mandatory=$true)]
 			[string]$algorithm,
@@ -12,7 +15,7 @@ function Compare-Hash {
 		$test = $provided_hash -eq $calculated.Hash
 		Write-Host $test
 }
-
+#Little function to make opening file in vim a bit quicker
 function vim {
 	param (
 		[parameter(Mandatory=$true)]
