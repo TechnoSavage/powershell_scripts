@@ -1,4 +1,4 @@
-
+#Powershell module to add function to automate folder/subfolder creation for given year/month/day
 function Create-PhotoFolders{
   param([string]$Path,
         [string]$Year)
